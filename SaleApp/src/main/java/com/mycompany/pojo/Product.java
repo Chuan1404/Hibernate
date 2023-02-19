@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -37,8 +38,9 @@ public class Product implements Serializable {
     private double price;
     private String manufacturer;
     private String image;
+    @Column(name = "created_date")
     @Temporal(TemporalType.DATE)
-    private Date created_date;
+    private Date createdDate;
     private boolean active;
 
     @ManyToOne
@@ -142,14 +144,14 @@ public class Product implements Serializable {
      * @return the created_date
      */
     public Date getCreated_date() {
-        return created_date;
+        return createdDate;
     }
 
     /**
      * @param created_date the created_date to set
      */
     public void setCreated_date(Date created_date) {
-        this.created_date = created_date;
+        this.createdDate = created_date;
     }
 
     /**
