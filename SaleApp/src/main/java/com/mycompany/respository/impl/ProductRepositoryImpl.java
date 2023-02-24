@@ -61,6 +61,12 @@ public class ProductRepositoryImpl implements ProductRepository {
                 q.where(p5);
             }
 
+            // Order by id, name, price
+            String order = params.get("order");
+            if (order != null && !order.isEmpty()) {
+                q.orderBy(b.asc(root.get(order)));
+            }
+
             Query query = s.createQuery(q);
             return query.getResultList();
         }

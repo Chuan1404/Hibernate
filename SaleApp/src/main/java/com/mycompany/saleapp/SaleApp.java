@@ -29,6 +29,7 @@ public class SaleApp {
         params.put("fromPrice", "10000000");
         params.put("toPrice", "20000000");
         params.put("category", "Máy tính bảng");
+        params.put("order", "name");
         
         List<Product> products = p.getProducts(params);
         products.forEach(x -> System.out.printf("%s - %.1f - %s\n", x.getName(), x.getPrice(), x.getCategory().getName()));
