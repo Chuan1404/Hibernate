@@ -4,15 +4,13 @@
  */
 package com.mycompany.saleapp;
 
-import com.mycompany.pojo.Category;
-import com.mycompany.pojo.Product;
-import com.mycompany.respository.ProductRepository;
-import com.mycompany.respository.impl.ProductRepositoryImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.persistence.Query;
-import org.hibernate.Session;
+
+import com.mycompany.pojo.Product;
+import com.mycompany.respository.ProductRepository;
+import com.mycompany.respository.impl.ProductRepositoryImpl;
 
 /**
  *
@@ -25,8 +23,10 @@ public class SaleApp {
         
         Map<String, String> params = new HashMap<>();
         params.put("kw", "iphone");
+        params.put("fromPrice", "10000000");
+        params.put("toPrice", "20000000");
         
         List<Product> products = p.getProducts(params);
-        products.forEach(x -> System.out.println(x.getName()));
+        products.forEach(x -> System.out.printf("%s - %.1f\n", x.getName(), x.getPrice()));
     }
 }
