@@ -4,6 +4,7 @@
  */
 package com.mycompany.respository.impl;
 
+import com.mycompany.pojo.Category;
 import com.mycompany.pojo.Product;
 import com.mycompany.respository.ProductRepository;
 import com.mycompany.saleapp.HibernateUtil;
@@ -30,7 +31,7 @@ public class ProductRepositoryImpl implements ProductRepository {
             Root<Product> root = q.from(Product.class);
             q.select(root);
 
-            // Filter theo key word
+            // Filter by key word
             String kw = params.get("kw");
             if (kw != null && !kw.isEmpty()) {
                 Predicate p1 = b.like(root.get("name").as(String.class),
@@ -38,7 +39,7 @@ public class ProductRepositoryImpl implements ProductRepository {
                 q.where(p1);
             }
 
-            // Filter theo price
+            // Filter by price
             String fromPrice = params.get("fromPrice");
             String toPrice = params.get("toPrice");
 
@@ -51,6 +52,13 @@ public class ProductRepositoryImpl implements ProductRepository {
             if (toPrice != null && !toPrice.isEmpty()) {
                 Predicate p3 = b.lessThanOrEqualTo(root.get("price").as(Double.class), Double.parseDouble(toPrice));
                 q.where(p3);
+            }
+
+            // Filter by category name
+            String categoryName = params.get("category");
+            if (categoryName != null && !categoryName.isEmpty()) {
+                Predicate p5 = b.equal(root.get("category").get("name").as(String.class), categoryName);
+                q.where(p5);
             }
 
             Query query = s.createQuery(q);
